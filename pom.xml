@@ -18,10 +18,11 @@
   <packaging>pom</packaging>
 
   <name>iooo-proxy-moomba</name>
-  <description>Demo project for Spring Boot</description>
+  <description>iooo-proxy-moomba project</description>
 
   <modules>
     <module>iooo-proxy-server</module>
+    <module>iooo-proxy-client</module>
     <module>iooo-commons</module>
   </modules>
 
@@ -82,6 +83,10 @@
     <dependency>
       <groupId>org.springframework.retry</groupId>
       <artifactId>spring-retry</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
     </dependency>
 
     <dependency>
