@@ -15,5 +15,5 @@ public class ServerProperties {
   private Integer port = 1089;
   
   private boolean auth = true;
-  private boolean logging = true;
+  private boolean logging = false;
 }

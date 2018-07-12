@@ -60,7 +60,8 @@ public class ProxyFlowLogImpl implements ProxyFlowLog {
     long readByte = trafficShapingHandler.trafficCounter().cumulativeReadBytes();
     long writeByte = trafficShapingHandler.trafficCounter().cumulativeWrittenBytes();
 
-    logger.info("{},{},{},{}:{},{}:{},{},{},{}",
+    logger.info(
+        "Username:[{}],BeginTime:[{}],EndTime:[{}],Local:[{}:{}],Remote:[{}:{}],readByte:[{}],writeByte:[{}],total:[{}]",
         trafficShapingHandler.getUsername(),
         trafficShapingHandler.getBeginTime(),
         trafficShapingHandler.getEndTime(),
