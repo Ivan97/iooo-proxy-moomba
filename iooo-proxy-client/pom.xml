@@ -27,10 +27,6 @@
       <groupId>tech.iooo.coco</groupId>
       <artifactId>iooo-commons</artifactId>
     </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-client</artifactId>
-    </dependency>
   </dependencies>
 
   <build>
