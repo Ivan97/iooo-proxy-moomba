@@ -22,7 +22,7 @@ public class HttpProxyClient {
 
   @Test
   public void test() {
-    for (int i = 0; i < this.i - 1; i++) {
+    for (int i = 0; i < this.i; i++) {
       new Thread(new Runner()).start();
     }
     try {
