@@ -12,6 +12,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application.auth")
 public class AuthProperties {
 
-  private String username = "test";
-  private String password = "test";
+  private String username ;
+  private String password;
 }

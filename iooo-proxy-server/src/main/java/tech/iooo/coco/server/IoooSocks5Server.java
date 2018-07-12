@@ -14,16 +14,20 @@ import io.netty.handler.codec.socksx.v5.Socks5PasswordAuthRequestDecoder;
 import io.netty.handler.codec.socksx.v5.Socks5ServerEncoder;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.timeout.IdleStateHandler;
+import lombok.Getter;
+import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.stereotype.Component;
+import tech.iooo.boot.core.utils.Assert;
 import tech.iooo.coco.auth.PasswordAuth;
 import tech.iooo.coco.commons.component.ChannelListener;
 import tech.iooo.coco.commons.component.ProxyChannelTrafficShapingHandler;
 import tech.iooo.coco.commons.component.ProxyIdleHandler;
 import tech.iooo.coco.commons.log.ProxyFlowLog;
+import tech.iooo.coco.properties.AuthProperties;
 import tech.iooo.coco.properties.ServerProperties;
 import tech.iooo.coco.ss5.Socks5CommandRequestHandler;
 import tech.iooo.coco.ss5.Socks5InitialRequestHandler;
@@ -43,6 +47,8 @@ public class IoooSocks5Server implements SmartLifecycle {
   @Autowired
   private ServerProperties serverProperties;
   @Autowired
+  private AuthProperties authProperties;
+  @Autowired
   private PasswordAuth passwordAuth;
 
   @Autowired
@@ -52,6 +58,8 @@ public class IoooSocks5Server implements SmartLifecycle {
   @Autowired
   private ProxyFlowLog proxyFlowLog;
 
+  @Getter
+  @Setter
   private ChannelListener channelListener;
 
   @Override
@@ -66,6 +74,8 @@ public class IoooSocks5Server implements SmartLifecycle {
 
   @Override
   public void start() {
+
+    authCheck();
 
     EventLoopGroup boss = new NioEventLoopGroup(2);
     EventLoopGroup worker = new NioEventLoopGroup();
@@ -139,5 +149,12 @@ public class IoooSocks5Server implements SmartLifecycle {
   @Override
   public int getPhase() {
     return Integer.MAX_VALUE;
+  }
+
+  private void authCheck() {
+    if (serverProperties.isAuth()) {
+      Assert.hasText(authProperties.getUsername(), "while auth is required,the username should NOT be empty");
+      Assert.hasText(authProperties.getPassword(), "while auth is required,the password should NOT be empty");
+    }
   }
 }
