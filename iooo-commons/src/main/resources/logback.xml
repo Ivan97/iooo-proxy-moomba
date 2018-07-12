@@ -4,7 +4,7 @@
   <include resource="logging/logback/base.xml"/>
 
   <logger name="ch.qos.logback" level="WARN"/>
-  <logger name="io.netty" level="INFO"/>
+  <logger name="io.netty" level="${logback.level}"/>
   <logger name="org.hibernate.validator" level="WARN"/>
   <logger name="tech.iooo.coco" level="${logback.level}"/>
   <logger name="tech.iooo.coco.commons" level="${ss.dev.level}"/>

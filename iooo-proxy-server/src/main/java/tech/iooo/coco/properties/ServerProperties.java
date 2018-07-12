@@ -1,4 +1,4 @@
-package tech.iooo.coco.entity;
+package tech.iooo.coco.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,5 +12,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "application.server")
 public class ServerProperties {
 
-  private Integer port = 1087;
+  private Integer port = 1089;
+  
+  private boolean auth = true;
+  private boolean logging = true;
 }

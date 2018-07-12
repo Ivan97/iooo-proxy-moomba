@@ -1,0 +1,6 @@
+application:
+  server:
+    auth: true
+  auth:
+    username: ivan97
+    password: test

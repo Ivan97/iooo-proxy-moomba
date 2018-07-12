@@ -1,4 +1,4 @@
-package tech.iooo.coco.commons;
+package tech.iooo.coco.commons.component;
 
 import com.google.protobuf.MessageLite;
 import io.netty.channel.Channel;

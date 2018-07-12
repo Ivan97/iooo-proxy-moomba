@@ -1,4 +1,4 @@
-package tech.iooo.coco.commons.ss5;
+package tech.iooo.coco.ss5;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;

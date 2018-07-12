@@ -1,4 +1,4 @@
-package tech.iooo.coco.commons;
+package tech.iooo.coco.commons.component;
 
 import io.netty.util.internal.SystemPropertyUtil;
 import java.io.FileInputStream;

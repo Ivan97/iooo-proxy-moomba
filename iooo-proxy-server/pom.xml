@@ -27,6 +27,11 @@
       <groupId>tech.iooo.coco</groupId>
       <artifactId>iooo-commons</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
