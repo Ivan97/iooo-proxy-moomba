@@ -5,6 +5,10 @@
 
   <logger name="ch.qos.logback" level="WARN"/>
   <logger name="io.netty" level="INFO"/>
+  <logger name="org.hibernate.validator" level="WARN"/>
   <logger name="tech.iooo.coco" level="${logback.level}"/>
+  <logger name="tech.iooo.coco.server" level="TRACE"/>
+  <logger name="tech.iooo.coco.client" level="TRACE"/>
+
 
 </configuration>
