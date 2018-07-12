@@ -34,6 +34,7 @@
       </activation>
       <properties>
         <logback.level>DEBUG</logback.level>
+        <ss.dev.level>TRACE</ss.dev.level>
       </properties>
     </profile>
     <profile>
@@ -43,6 +44,7 @@
       </activation>
       <properties>
         <logback.level>INFO</logback.level>
+        <ss.dev.level>INFO</ss.dev.level>
       </properties>
     </profile>
   </profiles>

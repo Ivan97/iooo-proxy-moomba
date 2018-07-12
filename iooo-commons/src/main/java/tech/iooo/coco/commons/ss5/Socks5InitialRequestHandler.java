@@ -19,11 +19,11 @@ public class Socks5InitialRequestHandler extends SimpleChannelInboundHandler<Def
   @Override
   protected void channelRead0(ChannelHandlerContext ctx, DefaultSocks5InitialRequest msg) throws Exception {
     if (logger.isDebugEnabled()) {
-      logger.debug("初始化ss5连接 : " + msg);
+      logger.debug("INITIAL OF THE SOCKS5 CONNECTION : " + msg);
     }
     if (msg.decoderResult().isFailure()) {
       if (logger.isDebugEnabled()) {
-        logger.debug("不是ss5协议");
+        logger.debug("THIS CONNECTION IS NOT SOCKS5");
       }
       ctx.fireChannelRead(msg);
     } else {

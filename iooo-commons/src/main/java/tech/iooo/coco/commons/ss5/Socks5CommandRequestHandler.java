@@ -35,13 +35,14 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
   @Override
   protected void channelRead0(final ChannelHandlerContext clientChannelContext, DefaultSocks5CommandRequest msg)
       throws Exception {
+    String target = msg.dstAddr() + ":" + msg.dstPort();
     if (logger.isDebugEnabled()) {
-      logger.debug("目标服务器  : " + msg.type() + "," + msg.dstAddr() + "," + msg.dstPort());
+      logger.debug("TARGET ADDRESS  : " + msg.type() + "," + target);
 
     }
     if (msg.type().equals(Socks5CommandType.CONNECT)) {
       if (logger.isTraceEnabled()) {
-        logger.trace("准备连接目标服务器");
+        logger.trace("PREPARING TO GET ACCESS TO THE TARGET ADDRESS:[{}]", target);
       }
 
       Bootstrap bootstrap = new Bootstrap();
@@ -57,13 +58,13 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
             }
           });
       if (logger.isTraceEnabled()) {
-        logger.trace("连接目标服务器");
+        logger.trace("CONNECTING TO THE TARGET ADDRESS:[{}]", target);
       }
       ChannelFuture future = bootstrap.connect(msg.dstAddr(), msg.dstPort());
       future.addListener((ChannelFutureListener) channelFuture -> {
         if (channelFuture.isSuccess()) {
           if (logger.isTraceEnabled()) {
-            logger.trace("成功连接目标服务器");
+            logger.trace("CONNECTED TO THE TARGET ADDRESS SUCCESSFULLY");
           }
           clientChannelContext.pipeline().addLast(new Client2DestHandler(channelFuture));
           Socks5CommandResponse commandResponse = new DefaultSocks5CommandResponse(
@@ -96,7 +97,7 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
     @Override
     public void channelRead(ChannelHandlerContext ctx2, Object destMsg) throws Exception {
       if (logger.isTraceEnabled()) {
-        logger.trace("将目标服务器信息转发给客户端");
+        logger.trace("SERVER=>PROXY=>CLIENT");
       }
       clientChannelContext.writeAndFlush(destMsg);
     }
@@ -104,7 +105,7 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
     @Override
     public void channelInactive(ChannelHandlerContext ctx2) throws Exception {
       if (logger.isTraceEnabled()) {
-        logger.trace("目标服务器断开连接");
+        logger.trace("DISCONNECT FROM THE TARGET ADDRESS");
       }
       clientChannelContext.channel().close();
     }
@@ -126,7 +127,7 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
       if (logger.isTraceEnabled()) {
-        logger.trace("将客户端的消息转发给目标服务器端");
+        logger.trace("CLIENT=>PROXY=>SERVER");
       }
       destChannelFuture.channel().writeAndFlush(msg);
     }
@@ -134,7 +135,7 @@ public class Socks5CommandRequestHandler extends SimpleChannelInboundHandler<Def
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
       if (logger.isTraceEnabled()) {
-        logger.trace("客户端断开连接");
+        logger.trace("CLIENT DISCONNECTED");
       }
       destChannelFuture.channel().close();
     }
