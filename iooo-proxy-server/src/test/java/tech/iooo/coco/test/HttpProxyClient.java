@@ -43,7 +43,7 @@ public class HttpProxyClient {
                   .setType(ProxyType.SOCKS5)
                   .setHost("127.0.0.1")
                   .setPort(1089)
-                  .setUsername("ivan97")
+                  .setUsername("test")
                   .setPassword("test")));
       logger.info("called...");
       client.get("https://www.baidu.com").send(result -> {
